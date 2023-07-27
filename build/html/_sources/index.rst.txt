@@ -8,6 +8,8 @@ Netaxe Docs
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
+
+   Manual/index
+   Devlop/index
    
-   Start/index
 

@@ -1,0 +1,206 @@
+# 快速开始
+ 
+## 在 Docker 上安装 Netaxe
+
+通过 Docker 进行安装 Netaxe，需要提前在本地安装好 Docker。
+
+## Docker 的安装请参考官方文档：
+
+- [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu)
+- [Debian](https://docs.docker.com/install/linux/docker-ce/debian)
+- [CentOS](https://docs.docker.com/install/linux/docker-ce/centos)
+
+### 安装`docker` 以及 `docker-compose`
+
+   <details>
+   <summary>
+   CentOS
+   （<a href="https://docs.docker.com/engine/install/centos/">查看官方教程</a>）
+   </summary>
+
+1.  卸载老版本 `docker` 或 `docker-engine`
+
+    ```bash
+    sudo yum remove docker \
+    docker-client \
+    docker-client-latest \
+    docker-common \
+    docker-latest \
+    docker-latest-logrotate \
+    docker-logrotate \
+    docker-engine
+    ```
+
+2.  设置仓库
+
+    ```bash
+    sudo yum install -y yum-utils
+    ```
+
+    以下两个二选一，第二个是国内源
+
+    ```bash
+    sudo yum-config-manager \
+     --add-repo \
+     https://download.docker.com/linux/centos/docker-ce.repo
+    ```
+
+    ```bash
+    sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    ```
+
+3.  安装 `docker` 引擎
+
+    ```bash
+    sudo yum install -y docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+    ```
+
+4.  运行 `docker`
+
+    ```bash
+    sudo systemctl start docker
+    ```
+
+   </details>
+
+   <details>
+   <summary>
+   Ubuntu
+   （<a href="https://docs.docker.com/engine/install/ubuntu/">查看官方教程</a>）
+   </summary>
+
+1.  卸载老版本 `docker` 或 `docker-engine`
+
+    ```bash
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    ```
+
+2.  设置仓库
+
+    1. 更新 `apt` 程序包索引并安装依赖
+
+       ```bash
+       sudo apt-get update
+       ```
+
+       ```bash
+       sudo apt-get install \
+       ca-certificates \
+       curl \
+       gnupg \
+       lsb-release
+       ```
+
+    2. 添加 Docker 官方 GPG 密钥
+
+       ```bash
+       sudo mkdir -m 0755 -p /etc/apt/keyrings
+       ```
+
+       ```bash
+       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+       ```
+
+    3. 设置仓库
+
+       ```bash
+       echo \
+       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+       ```
+
+3.  安装 `docker` 引擎
+
+    ```bash
+    sudo apt-get update
+    ```
+
+    > 运行 `apt-get` 更新时收到 GPG 错误?
+    >
+    > ```bash
+    > sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    > ```
+    >
+    > ```bash
+    >  sudo apt-get update
+    > ```
+
+    ```bash
+    sudo apt-get install docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+    ```
+
+   </details>
+
+## 部署平台
+
+```shell
+
+关闭防火墙：
+systemctl stop firewalld.service
+systemctl disable firewalld.service 
+需要关闭 selinux
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+确认是否修改成功
+grep SELINUX /etc/selinux/config
+然后重启系统即可
+reboot
+
+git clone https://gitee.com/iflytek/NetAxe.git
+
+cd NetAxe/install-compose/
+
+sh init.sh   && sh  deploy.sh  && sh init_apisix.sh
+```
+
+会自动发现你服务器默认路由对应的网卡 IP 作为服务部署后监听的 IP
+如果你的服务器涉及到 IP 映射或者 nginx 代理，需要改成
+
+```shell
+sh init.sh 1.1.1.1   && sh  deploy.sh  && sh init_apisix.sh
+```
+
+其中的 1.1.1.1 就是你希望服务最终运行的 IP
+
+
+## 应用端口规划表
+
+| 应用         | 前端 web | 后端 controller | 别名         |
+| ------------ | -------- | --------------- | ------------ |
+| 微前端主应用 | 9980     | -               | -            |
+| 基础平台     | 32200    | 31100           | base         |
+| 消息网关     | 32201    | 31101           | msg-gateway  |
+| 告警中心     | 32202    | 31102           | alert        |
+| IPAM         | 32203    | 31103           | ipam         |
+| RBAC         | 32204    | 31104           | rbac         |
+| 南向驱动     | 32205    | 31105           | south-driver |
+| 监控中心     | 32206    | 31106           | neteye       |
+| 可视化指标   | 32207    | 31107           | metric       |
+| DCN 控制器   | 32208    | 31108           | dcn          |
+| DCS 控制器   | 32208    | 31108           | dcs          |
+| 工作流引擎   | 32209    | 31109           | work-flow    |
+| 资源平台     | 32210    | 31110           | cmdb         |
+| 私有平台     | 32211    | 31111           | private      |
+
+## 底层工具端口规划表
+
+| 应用             | 端口                |
+| ---------------- | ------------------- |
+| apisix-dashboard | 39000               |
+| apisix           | 9080/9091/9092/9443 |
+| etcd             | 2379                |
+| mongo            | 37018               |
+| mongo-express    | 37017               |
+| mysql            | 36306               |
+| redis            | 36379               |
+| rabbitmq         | 31672/32672         |
+| nacos            | 8848                |
+| pushgateway      | 39091               |
+| prometheus       | 39090               |

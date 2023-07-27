@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>架构介绍 &mdash; netaxe 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="前端设计" href="../01%E5%89%8D%E7%AB%AF/index.html" />
+    <link rel="prev" title="介绍" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            netaxe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Netaxe快速开始</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">介绍</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">架构介绍</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">前言</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">架构设计原则</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">应用端口规划表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">底层工具端口规划表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">技术架构图</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">后端技术选型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">前端技术选型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../01%E5%89%8D%E7%AB%AF/index.html">前端设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">设计模式</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">netaxe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Netaxe快速开始</a></li>
+          <li class="breadcrumb-item"><a href="index.html">介绍</a></li>
+      <li class="breadcrumb-item active">架构介绍</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Start/00介绍/01架构介绍.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>架构介绍<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<section id="id2">
+<h2>前言<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>早期平台是一个单体应用，随着功能和需求的不断增多，维护一个单体巨石应用的成本和劣势逐渐凸显，并且到了无法忍受的地步。<br />每次小的功能更新都不得不重启整个后端服务，造成前端交互短暂失联。<br />开发成员的增加，从前后端、工具、架构一人挑到多人分工协作各司其职，各种流程、规范、标准化难题也是不得不去思考和解决的。</p>
+</section>
+<section id="id3">
+<h2>架构设计原则<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>从架构了可维护性和标准化角度出发，每个后端应用，应该具备相对一致的代码目录结构、一致的配置加载规范、一致的消息总线配置。<br />所有微服务应用都应该是易部署，可重复的功能模块(可重复部署、简化部署步骤)<br />通用的 API 端点。</p>
+</section>
+<section id="id4">
+<h2>应用端口规划表<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>应用</th>
+<th>前端 web</th>
+<th>后端 controller</th>
+<th>别名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微前端主应用</td>
+<td>9980</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>基础平台</td>
+<td>32200</td>
+<td>31100</td>
+<td>base</td>
+</tr>
+<tr>
+<td>消息网关</td>
+<td>32201</td>
+<td>31101</td>
+<td>msg-gateway</td>
+</tr>
+<tr>
+<td>告警中心</td>
+<td>32202</td>
+<td>31102</td>
+<td>alert</td>
+</tr>
+<tr>
+<td>IPAM</td>
+<td>32203</td>
+<td>31103</td>
+<td>ipam</td>
+</tr>
+<tr>
+<td>RBAC</td>
+<td>32204</td>
+<td>31104</td>
+<td>rbac</td>
+</tr>
+<tr>
+<td>南向驱动</td>
+<td>32205</td>
+<td>31105</td>
+<td>south-driver</td>
+</tr>
+<tr>
+<td>监控中心</td>
+<td>32206</td>
+<td>31106</td>
+<td>neteye</td>
+</tr>
+<tr>
+<td>可视化指标</td>
+<td>32207</td>
+<td>31107</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>DCN 控制器</td>
+<td>32208</td>
+<td>31108</td>
+<td>dcn</td>
+</tr>
+<tr>
+<td>DCS 控制器</td>
+<td>32208</td>
+<td>31108</td>
+<td>dcs</td>
+</tr>
+<tr>
+<td>工作流引擎</td>
+<td>32209</td>
+<td>31109</td>
+<td>work-flow</td>
+</tr>
+<tr>
+<td>资源平台</td>
+<td>32210</td>
+<td>31110</td>
+<td>cmdb</td>
+</tr>
+<tr>
+<td>私有平台</td>
+<td>32211</td>
+<td>31111</td>
+<td>private</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id5">
+<h2>底层工具端口规划表<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>应用</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apisix-dashboard</td>
+<td>39000</td>
+</tr>
+<tr>
+<td>apisix</td>
+<td>9080/9091/9092/9443</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>2379</td>
+</tr>
+<tr>
+<td>mongo</td>
+<td>37018</td>
+</tr>
+<tr>
+<td>mongo-express</td>
+<td>37017</td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>36306</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>36379</td>
+</tr>
+<tr>
+<td>rabbitmq</td>
+<td>31672/32672</td>
+</tr>
+<tr>
+<td>nacos</td>
+<td>8848</td>
+</tr>
+<tr>
+<td>pushgateway</td>
+<td>39091</td>
+</tr>
+<tr>
+<td>prometheus</td>
+<td>39090</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id6">
+<h2>技术架构图<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id7">
+<h2>后端技术选型<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id8">
+<h2>前端技术选型<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../01%E5%89%8D%E7%AB%AF/index.html" class="btn btn-neutral float-right" title="前端设计" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Netaxe 专注网络自动化领域架构解决方案.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

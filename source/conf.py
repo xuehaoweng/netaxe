@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'netaxe-readthedocs'
-copyright = '2023, netaxe'
+project = 'netaxe'
+copyright = '2023, Netaxe 专注网络自动化领域架构解决方案'
 author = 'netaxe'
 release = '1.0.0'
 

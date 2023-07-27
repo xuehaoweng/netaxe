@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>快速开始 &mdash; netaxe 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            netaxe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">快速开始</a><ul>
+<li><a class="reference internal" href="#docker-netaxe">在 Docker 上安装 Netaxe</a></li>
+<li><a class="reference internal" href="#docker">Docker 的安装请参考官方文档：</a><ul>
+<li><a class="reference internal" href="#docker-docker-compose">安装<code class="docutils literal notranslate"><span class="pre">docker</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">部署平台</a></li>
+<li><a class="reference internal" href="#id3">应用端口规划表</a></li>
+<li><a class="reference internal" href="#id4">底层工具端口规划表</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">netaxe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">快速开始</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Manual/00快速入门/01快速开始.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>快速开始<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<section id="docker-netaxe">
+<h2>在 Docker 上安装 Netaxe<a class="headerlink" href="#docker-netaxe" title="Permalink to this heading"></a></h2>
+<p>通过 Docker 进行安装 Netaxe，需要提前在本地安装好 Docker。</p>
+</section>
+<section id="docker">
+<h2>Docker 的安装请参考官方文档：<a class="headerlink" href="#docker" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/ubuntu">Ubuntu</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/debian">Debian</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/centos">CentOS</a></p></li>
+</ul>
+<section id="docker-docker-compose">
+<h3>安装<code class="docutils literal notranslate"><span class="pre">docker</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code><a class="headerlink" href="#docker-docker-compose" title="Permalink to this heading"></a></h3>
+   <details>
+   <summary>
+   CentOS
+   （<a href="https://docs.docker.com/engine/install/centos/">查看官方教程</a>）
+   </summary><ol>
+<li><p>卸载老版本 <code class="docutils literal notranslate"><span class="pre">docker</span></code> 或 <code class="docutils literal notranslate"><span class="pre">docker-engine</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </span>docker<span class="w"> </span><span class="se">\</span>
+docker-client<span class="w"> </span><span class="se">\</span>
+docker-client-latest<span class="w"> </span><span class="se">\</span>
+docker-common<span class="w"> </span><span class="se">\</span>
+docker-latest<span class="w"> </span><span class="se">\</span>
+docker-latest-logrotate<span class="w"> </span><span class="se">\</span>
+docker-logrotate<span class="w"> </span><span class="se">\</span>
+docker-engine
+</pre></div>
+</div>
+</li>
+<li><p>设置仓库</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>yum-utils
+</pre></div>
+</div>
+<p>以下两个二选一，第二个是国内源</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum-config-manager<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>--add-repo<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>https://download.docker.com/linux/centos/docker-ce.repo
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum-config-manager<span class="w"> </span>--add-repo<span class="w"> </span>http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</pre></div>
+</div>
+</li>
+<li><p>安装 <code class="docutils literal notranslate"><span class="pre">docker</span></code> 引擎</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker-ce<span class="w"> </span><span class="se">\</span>
+docker-ce-cli<span class="w"> </span><span class="se">\</span>
+containerd.io<span class="w"> </span><span class="se">\</span>
+docker-buildx-plugin<span class="w"> </span><span class="se">\</span>
+docker-compose-plugin
+</pre></div>
+</div>
+</li>
+<li><p>运行 <code class="docutils literal notranslate"><span class="pre">docker</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+</pre></div>
+</div>
+</li>
+</ol>
+   </details>   <details>
+   <summary>
+   Ubuntu
+   （<a href="https://docs.docker.com/engine/install/ubuntu/">查看官方教程</a>）
+   </summary><ol>
+<li><p>卸载老版本 <code class="docutils literal notranslate"><span class="pre">docker</span></code> 或 <code class="docutils literal notranslate"><span class="pre">docker-engine</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>docker<span class="w"> </span>docker-engine<span class="w"> </span>docker.io<span class="w"> </span>containerd<span class="w"> </span>runc
+</pre></div>
+</div>
+</li>
+<li><p>设置仓库</p>
+<ol>
+<li><p>更新 <code class="docutils literal notranslate"><span class="pre">apt</span></code> 程序包索引并安装依赖</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+ca-certificates<span class="w"> </span><span class="se">\</span>
+curl<span class="w"> </span><span class="se">\</span>
+gnupg<span class="w"> </span><span class="se">\</span>
+lsb-release
+</pre></div>
+</div>
+</li>
+<li><p>添加 Docker 官方 GPG 密钥</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-m<span class="w"> </span><span class="m">0755</span><span class="w"> </span>-p<span class="w"> </span>/etc/apt/keyrings
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/docker.gpg
+</pre></div>
+</div>
+</li>
+<li><p>设置仓库</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \</span>
+<span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/docker.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p>安装 <code class="docutils literal notranslate"><span class="pre">docker</span></code> 引擎</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+<blockquote>
+<div><p>运行 <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> 更新时收到 GPG 错误?</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span>a+r<span class="w"> </span>/etc/apt/keyrings/docker.gpg
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span><span class="se">\</span>
+docker-ce-cli<span class="w"> </span><span class="se">\</span>
+containerd.io<span class="w"> </span><span class="se">\</span>
+docker-buildx-plugin<span class="w"> </span><span class="se">\</span>
+docker-compose-plugin
+</pre></div>
+</div>
+</li>
+</ol>
+   </details></section>
+</section>
+<section id="id2">
+<h2>部署平台<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>关闭防火墙：
+systemctl<span class="w"> </span>stop<span class="w"> </span>firewalld.service
+systemctl<span class="w"> </span>disable<span class="w"> </span>firewalld.service<span class="w"> </span>
+需要关闭<span class="w"> </span>selinux
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot;</span><span class="w"> </span>/etc/selinux/config
+确认是否修改成功
+grep<span class="w"> </span>SELINUX<span class="w"> </span>/etc/selinux/config
+然后重启系统即可
+reboot
+
+git<span class="w"> </span>clone<span class="w"> </span>https://gitee.com/iflytek/NetAxe.git
+
+<span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/
+
+sh<span class="w"> </span>init.sh<span class="w">   </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w">  </span>deploy.sh<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w"> </span>init_apisix.sh
+</pre></div>
+</div>
+<p>会自动发现你服务器默认路由对应的网卡 IP 作为服务部署后监听的 IP
+如果你的服务器涉及到 IP 映射或者 nginx 代理，需要改成</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh<span class="w"> </span>init.sh<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w">   </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w">  </span>deploy.sh<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w"> </span>init_apisix.sh
+</pre></div>
+</div>
+<p>其中的 1.1.1.1 就是你希望服务最终运行的 IP</p>
+</section>
+<section id="id3">
+<h2>应用端口规划表<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>应用</th>
+<th>前端 web</th>
+<th>后端 controller</th>
+<th>别名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微前端主应用</td>
+<td>9980</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>基础平台</td>
+<td>32200</td>
+<td>31100</td>
+<td>base</td>
+</tr>
+<tr>
+<td>消息网关</td>
+<td>32201</td>
+<td>31101</td>
+<td>msg-gateway</td>
+</tr>
+<tr>
+<td>告警中心</td>
+<td>32202</td>
+<td>31102</td>
+<td>alert</td>
+</tr>
+<tr>
+<td>IPAM</td>
+<td>32203</td>
+<td>31103</td>
+<td>ipam</td>
+</tr>
+<tr>
+<td>RBAC</td>
+<td>32204</td>
+<td>31104</td>
+<td>rbac</td>
+</tr>
+<tr>
+<td>南向驱动</td>
+<td>32205</td>
+<td>31105</td>
+<td>south-driver</td>
+</tr>
+<tr>
+<td>监控中心</td>
+<td>32206</td>
+<td>31106</td>
+<td>neteye</td>
+</tr>
+<tr>
+<td>可视化指标</td>
+<td>32207</td>
+<td>31107</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>DCN 控制器</td>
+<td>32208</td>
+<td>31108</td>
+<td>dcn</td>
+</tr>
+<tr>
+<td>DCS 控制器</td>
+<td>32208</td>
+<td>31108</td>
+<td>dcs</td>
+</tr>
+<tr>
+<td>工作流引擎</td>
+<td>32209</td>
+<td>31109</td>
+<td>work-flow</td>
+</tr>
+<tr>
+<td>资源平台</td>
+<td>32210</td>
+<td>31110</td>
+<td>cmdb</td>
+</tr>
+<tr>
+<td>私有平台</td>
+<td>32211</td>
+<td>31111</td>
+<td>private</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id4">
+<h2>底层工具端口规划表<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>应用</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apisix-dashboard</td>
+<td>39000</td>
+</tr>
+<tr>
+<td>apisix</td>
+<td>9080/9091/9092/9443</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>2379</td>
+</tr>
+<tr>
+<td>mongo</td>
+<td>37018</td>
+</tr>
+<tr>
+<td>mongo-express</td>
+<td>37017</td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>36306</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>36379</td>
+</tr>
+<tr>
+<td>rabbitmq</td>
+<td>31672/32672</td>
+</tr>
+<tr>
+<td>nacos</td>
+<td>8848</td>
+</tr>
+<tr>
+<td>pushgateway</td>
+<td>39091</td>
+</tr>
+<tr>
+<td>prometheus</td>
+<td>39090</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Netaxe 专注网络自动化领域架构解决方案.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
