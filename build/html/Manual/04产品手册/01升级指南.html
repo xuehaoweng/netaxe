@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>资源管理 &mdash; netaxe 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            netaxe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Netaxe用户手册</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Devlop/index.html">Netaxe开发文档</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">netaxe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">资源管理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Manual/04产品手册/01升级指南.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>资源管理<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<section id="id2">
+<h2>2023.6.28 版本升级<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h3>更新内容<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>rbac: 优化服务自动向 rbac 注册服务和注册导航菜单逻辑</p></li>
+<li><p>base webssh：登录后端权限二次验证</p></li>
+<li><p>全局: 所有 config.json 配置项删除了 web_port 和 web_ip，改为了 web_url 例如：”http://tmp_server_ip:32200”，为了解决 https 场景</p></li>
+<li><p>rbac: 增加 ldap 配置项，目前验证 windown AD 域控对接</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>升级步骤<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<section id="web">
+<h4>web 主应用<a class="headerlink" href="#web" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/main-compose
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+<section id="rbac">
+<h4>RBAC 权限模块<a class="headerlink" href="#rbac" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/rbac-compose
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>修改config.json
+删除web_ip<span class="w"> </span>和<span class="w"> </span>web_port配置项
+改为
+<span class="s2">&quot;web_url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://tmp_server_ip:32204&quot;</span>,
+其中tmp_server_ip<span class="w"> </span>是你服务器的IP
+在后面增加如下配置项：
+<span class="w">  </span><span class="s2">&quot;auth_ldap&quot;</span>:<span class="w"> </span>false,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_server_uri&quot;</span>:<span class="w"> </span><span class="s2">&quot;ldap://1.1.1.1:389&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_bind_dn&quot;</span>:<span class="w"> </span><span class="s2">&quot;CN=aaa,CN=Users,DC=dc,DC=local&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_bind_password&quot;</span>:<span class="w"> </span><span class="s2">&quot;asdfasdf&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_user_search&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;ou=aa,dc=aa,dc=aa&quot;</span>,<span class="w"> </span><span class="s2">&quot;(sAMAccountName=%(user)s)&quot;</span><span class="o">]</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_group_search&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;ou=aa,dc=aa,dc=aa&quot;</span>,<span class="w"> </span><span class="s2">&quot;(objectClass=groupOfNames)&quot;</span><span class="o">]</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_user_attr_map&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;first_name&quot;</span>:<span class="w"> </span><span class="s2">&quot;givenName&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;password&quot;</span>:<span class="w"> </span><span class="s2">&quot;userPassword&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;last_name&quot;</span>:<span class="w"> </span><span class="s2">&quot;sn&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;email&quot;</span>:<span class="w"> </span><span class="s2">&quot;mail&quot;</span>
+<span class="w">  </span><span class="o">}</span>,
+<span class="w">  </span><span class="s2">&quot;auth_ldap_user_flags_by_group&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;is_active&quot;</span>:<span class="w"> </span><span class="s2">&quot;CN=aa,CN=Users,DC=aa,DC=local&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;is_staff&quot;</span>:<span class="w"> </span><span class="s2">&quot;CN=aa,CN=Users,DC=aa,DC=local&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;is_superuser&quot;</span>:<span class="w"> </span><span class="s2">&quot;CN=aa,CN=Users,DC=aa,DC=local&quot;</span>
+<span class="w">  </span><span class="o">}</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>基础平台<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/baseplatform-compose
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>修改config.json
+删除web_ip<span class="w"> </span>和<span class="w"> </span>web_port配置项
+改为
+<span class="s2">&quot;web_url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://tmp_server_ip:32200&quot;</span>,
+其中tmp_server_ip<span class="w"> </span>是你服务器的IP
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h4>消息网关<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/msggateway-compose
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>修改config.json
+删除web_ip<span class="w"> </span>和<span class="w"> </span>web_port配置项
+改为
+<span class="s2">&quot;web_url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://tmp_server_ip:32201&quot;</span>,
+其中tmp_server_ip<span class="w"> </span>是你服务器的IP
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h4>告警中心<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/alertgateway-compose
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>修改config.json
+删除web_ip<span class="w"> </span>和<span class="w"> </span>web_port配置项
+改为
+<span class="s2">&quot;web_url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://tmp_server_ip:32200&quot;</span>,
+其中tmp_server_ip<span class="w"> </span>是你服务器的IP
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h4>地址管理<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>NetAxe/install-compose/ipam-compose
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>修改config.json
+删除web_ip<span class="w"> </span>和<span class="w"> </span>web_port配置项
+改为
+<span class="s2">&quot;web_url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://tmp_server_ip:32202&quot;</span>,
+其中tmp_server_ip<span class="w"> </span>是你服务器的IP
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>pull<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h3>更新日志<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Netaxe 专注网络自动化领域架构解决方案.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

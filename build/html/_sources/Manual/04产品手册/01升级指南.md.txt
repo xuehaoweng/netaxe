@@ -1,0 +1,132 @@
+# 资源管理
+ 
+## 2023.6.28 版本升级
+
+### 更新内容
+
+- rbac: 优化服务自动向 rbac 注册服务和注册导航菜单逻辑
+- base webssh：登录后端权限二次验证
+- 全局: 所有 config.json 配置项删除了 web_port 和 web_ip，改为了 web_url 例如："http://tmp_server_ip:32200"，为了解决 https 场景
+- rbac: 增加 ldap 配置项，目前验证 windown AD 域控对接
+
+### 升级步骤
+
+#### web 主应用
+
+```shell
+cd NetAxe/install-compose/main-compose
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+#### RBAC 权限模块
+
+```shell
+cd NetAxe/install-compose/rbac-compose
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+```shell
+修改config.json
+删除web_ip 和 web_port配置项
+改为
+"web_url": "http://tmp_server_ip:32204",
+其中tmp_server_ip 是你服务器的IP
+在后面增加如下配置项：
+  "auth_ldap": false,
+  "auth_ldap_server_uri": "ldap://1.1.1.1:389",
+  "auth_ldap_bind_dn": "CN=aaa,CN=Users,DC=dc,DC=local",
+  "auth_ldap_bind_password": "asdfasdf",
+  "auth_ldap_user_search": ["ou=aa,dc=aa,dc=aa", "(sAMAccountName=%(user)s)"],
+  "auth_ldap_group_search": ["ou=aa,dc=aa,dc=aa", "(objectClass=groupOfNames)"],
+  "auth_ldap_user_attr_map": {
+    "first_name": "givenName",
+    "password": "userPassword",
+    "last_name": "sn",
+    "email": "mail"
+  },
+  "auth_ldap_user_flags_by_group": {
+    "is_active": "CN=aa,CN=Users,DC=aa,DC=local",
+    "is_staff": "CN=aa,CN=Users,DC=aa,DC=local",
+    "is_superuser": "CN=aa,CN=Users,DC=aa,DC=local"
+  }
+```
+
+```shell
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+#### 基础平台
+
+```shell
+cd NetAxe/install-compose/baseplatform-compose
+```
+
+```shell
+修改config.json
+删除web_ip 和 web_port配置项
+改为
+"web_url": "http://tmp_server_ip:32200",
+其中tmp_server_ip 是你服务器的IP
+```
+
+```shell
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+#### 消息网关
+
+```shell
+cd NetAxe/install-compose/msggateway-compose
+```
+
+```shell
+修改config.json
+删除web_ip 和 web_port配置项
+改为
+"web_url": "http://tmp_server_ip:32201",
+其中tmp_server_ip 是你服务器的IP
+```
+
+```shell
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+#### 告警中心
+
+```shell
+cd NetAxe/install-compose/alertgateway-compose
+```
+
+```shell
+修改config.json
+删除web_ip 和 web_port配置项
+改为
+"web_url": "http://tmp_server_ip:32200",
+其中tmp_server_ip 是你服务器的IP
+```
+
+```shell
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+#### 地址管理
+
+```shell
+cd NetAxe/install-compose/ipam-compose
+```
+
+```shell
+修改config.json
+删除web_ip 和 web_port配置项
+改为
+"web_url": "http://tmp_server_ip:32202",
+其中tmp_server_ip 是你服务器的IP
+```
+
+```shell
+docker compose down -v && docker compose pull && docker compose up -d
+```
+
+
+### 更新日志
+
