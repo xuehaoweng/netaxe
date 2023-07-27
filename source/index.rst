@@ -3,12 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
  
-Netaxe Docs
+Netaxe 官方文档
 ======================================
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
+   :caption: 目录:
 
+   Intro/index
    Manual/index
    Devlop/index
    
